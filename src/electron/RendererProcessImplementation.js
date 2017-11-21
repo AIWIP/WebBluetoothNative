@@ -1,3 +1,5 @@
+const { ipcRenderer } = require('electron')
+
 module.exports = function setupWebBluetoothPolyfill(navigator) {
     const hasBluetoothSupport = (navigator.bluetooth !== undefined);
     const hasBluetoothLESupport = (navigator.bluetooth.requestLEScan !== undefined); 
