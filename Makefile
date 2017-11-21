@@ -1,7 +1,7 @@
 electron:
 	yarn install
 	./node_modules/.bin/electron-rebuild
-	webpack
+	webpack --config webpack-electron-render.config.js
 	echo "electron"
 
 ios:
