@@ -1,20 +1,22 @@
 const { ipcRenderer } = require('electron');
-const setupMainProcessPolyfill = require('./electron/MainProcessImplementation');
-const setupRendererPolyfill = require('./electron/RendererProcessImplementation');
-const setupBridge = require('./electron/Bridge');
 
 function isElectronMainProcess() {
-    return (process && process.type === 'browser')
+    return !global.hasOwnProperty('window')
 }
+
 function isElectronRenderer() {
-    return (process && process.type !== 'browser')
+    return process && global.hasOwnProperty('window')
 }
 
 if (isElectronMainProcess()) {
-    this.navigator = setupMainProcessPolyfill(navigator)
-    setupBridge(this.navigator)
+    const bluetooth = require('./electron/MainProcessImplementation');
+    const setupBridge = require('./electron/Bridge');
+
+    setupBridge(bluetooth)
+    module.exports = bluetooth
 }
 
 if (isElectronRenderer()) {
+    const setupRendererPolyfill = require('./electron/RendererProcessImplementation');    
     this.navigator = setupRendererPolyfill(navigator)
 }
