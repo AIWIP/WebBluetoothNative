@@ -1,15 +1,6 @@
-const noble = require('noble');
 const EventTarget = require('event-target-shim').EventTarget;
-
-class Event {
-    constructor(type, payload) {
-        this.type = type
-
-        for (var x in payload) {
-            this[x] = payload[x];
-        }
-    }
-}
+const Event = require('./event');
+const noble = require('noble');
 
 class BluetoothLEScan {
     constructor(implementation) {
