@@ -1,6 +1,16 @@
 const noble = require('noble');
 const EventTarget = require('event-target-shim').EventTarget;
 
+class Event {
+    constructor(type, payload) {
+        this.type = type
+
+        for (var x in payload) {
+            this[x] = payload[x];
+        }
+    }
+}
+
 class BluetoothLEScan {
     constructor(implementation) {
         this.implementation = implementation
@@ -26,13 +36,14 @@ class MainProcessImplementation extends EventTarget {
         noble.on('stateChange', function(state) {
             console.log('Bluetooth State Changed: ' + state);
             this.poweredOn = (state == 'poweredOn')
-        });
+            this._leRequestsDidUpdate()
+        }.bind(this));
 
         noble.on('discover', function(peripheral) {
             console.log('Dispatching Discovered Event: ' + peripheral);
             const event = new Event("advertisementreceived", peripheral)
             this.dispatchEvent(event)
-        });
+        }.bind(this));
     }
 
     requestLEScan() {
@@ -52,6 +63,10 @@ class MainProcessImplementation extends EventTarget {
     }
 
     _leRequestsDidUpdate() {
+
+        if (!this.poweredOn) {
+            return
+        }
 
         if (this.leRequests.length > 0) {
             console.log('Bluetooth Started Scanning')
