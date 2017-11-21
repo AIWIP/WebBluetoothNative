@@ -1,1 +1,1 @@
-../../web-bluetooth-native.js
+../../build/electron/index.js

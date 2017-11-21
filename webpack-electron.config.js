@@ -3,7 +3,7 @@ const webpack = require('webpack');
 module.exports = {
     entry: './src/index.electron.js',
     output: {
-      filename: 'web-bluetooth-native.js'
+      filename: 'build/electron/index.js'
     },
     plugins: [
       new webpack.ExternalsPlugin('commonjs', [

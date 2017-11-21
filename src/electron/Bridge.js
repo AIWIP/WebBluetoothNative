@@ -1,4 +1,4 @@
-module.exports = function setupBridge() {
+module.exports = function setupBridge(navigator) {
     
     // const {ipcMain} = require('electron')
 
