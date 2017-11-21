@@ -7,5 +7,11 @@ module.exports = {
         noble.on('stateChange', function(state) {
             console.log(state);
         });
+
+        noble.on('discover', function(peripheral) {
+            console.log(peripheral);
+        });
+
+        noble.startScanning();
     }
 }
