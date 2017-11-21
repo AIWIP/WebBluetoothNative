@@ -1,6 +1,5 @@
 const { ipcRenderer } = require('electron');
 const setupMainProcessPolyfill = require('./electron/MainProcessImplementation');
-const setupBridgePolyfill = require('./electron/BridgeImplementation');
 const setupRendererPolyfill = require('./electron/RendererProcessImplementation');
 
 function isElectronMainProcess() {
@@ -11,8 +10,6 @@ function isElectronRenderer() {
 }
 
 if (isElectronMainProcess()) {
-    setupBridgePolyfill()
-
     this.navigator = setupMainProcessPolyfill(navigator)
 }
 

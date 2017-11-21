@@ -69,7 +69,6 @@
 
 /* WEBPACK VAR INJECTION */(function(process) {const { ipcRenderer } = __webpack_require__(2);
 const setupMainProcessPolyfill = __webpack_require__(3);
-const setupBridgePolyfill = __webpack_require__(4);
 const setupRendererPolyfill = __webpack_require__(5);
 
 function isElectronMainProcess() {
@@ -80,8 +79,6 @@ function isElectronRenderer() {
 }
 
 if (isElectronMainProcess()) {
-    setupBridgePolyfill()
-
     this.navigator = setupMainProcessPolyfill(navigator)
 }
 
@@ -289,11 +286,15 @@ module.exports = require("electron");
 
 /***/ }),
 /* 3 */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
+
+const setupBridge= __webpack_require__(4);
 
 module.exports = function setupWebBluetoothPolyfill(navigator) {
     
     console.log('Main Implementation Goes Here')
+
+    setupBridge()
 
     return navigator
 }
@@ -302,7 +303,7 @@ module.exports = function setupWebBluetoothPolyfill(navigator) {
 /* 4 */
 /***/ (function(module, exports) {
 
-module.exports = function setupWebBluetoothPolyfill(navigator) {
+module.exports = function setupBridge() {
     
     // const {ipcMain} = require('electron')
 

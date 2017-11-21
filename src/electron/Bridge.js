@@ -1,4 +1,4 @@
-module.exports = function setupWebBluetoothPolyfill(navigator) {
+module.exports = function setupBridge() {
     
     // const {ipcMain} = require('electron')
 
