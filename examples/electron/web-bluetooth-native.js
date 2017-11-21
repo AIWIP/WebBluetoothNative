@@ -1,1 +1,1 @@
-../../build/electron/index.js
+../../src/index.electron.js
