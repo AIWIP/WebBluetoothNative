@@ -65,14 +65,29 @@
 /************************************************************************/
 /******/ ([
 /* 0 */
-/***/ (function(module, exports, __webpack_require__) {
+/***/ (function(module, exports) {
 
-"use strict";
 
-Object.defineProperty(exports, "__esModule", { value: true });
-var index_1 = __webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"./electron/index\""); e.code = 'MODULE_NOT_FOUND'; throw e; }()));
-index_1.default(navigator);
+function setupWebBluetoothPolyfill(navigator) {
+    const hasBluetoothSupport = (navigator.bluetooth !== undefined);
+    const hasBluetoothLESupport = (navigator.bluetooth.requestLEScan !== undefined); 
 
+	var bluetooth = navigator.bluetooth
+
+    console.log('Browser has bluetooth: ' + hasBluetoothSupport)
+    console.log('Browser has bluetooth LE support: ' + hasBluetoothLESupport)
+
+    if (!hasBluetoothSupport) {
+
+        console.log('Polyfilling Bluetooth Support')
+    }
+
+    if (!hasBluetoothLESupport) {
+        console.log('Polyfilling Bluetooth LE Support')
+    }
+}
+
+setupWebBluetoothPolyfill(navigator)
 
 /***/ })
 /******/ ]);
