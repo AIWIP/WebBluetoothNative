@@ -1,4 +1,7 @@
 {
+  "name": "web-bluetooth-native",
+  "module": "build/index.js",
+  "files": ["build/**/*.js"],
   "dependencies": {
     "@types/node": "^8.0.53"
   }
