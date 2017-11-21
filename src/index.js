@@ -1,3 +1,4 @@
+const noble = require('electron').remote.noble;
 
 function setupWebBluetoothPolyfill(navigator) {
     const hasBluetoothSupport = (navigator.bluetooth !== undefined);

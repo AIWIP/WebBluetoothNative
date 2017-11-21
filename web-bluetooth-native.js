@@ -65,8 +65,9 @@
 /************************************************************************/
 /******/ ([
 /* 0 */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
+const noble = __webpack_require__(1).remote.noble;
 
 function setupWebBluetoothPolyfill(navigator) {
     const hasBluetoothSupport = (navigator.bluetooth !== undefined);
@@ -88,6 +89,12 @@ function setupWebBluetoothPolyfill(navigator) {
 }
 
 setupWebBluetoothPolyfill(navigator)
+
+/***/ }),
+/* 1 */
+/***/ (function(module, exports) {
+
+module.exports = require("electron");
 
 /***/ })
 /******/ ]);
