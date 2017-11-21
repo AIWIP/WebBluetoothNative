@@ -16,3 +16,5 @@ class MainProcessImplementation {
         noble.startScanning();
     }
 }
+
+module.exports = new MainProcessImplementation()
