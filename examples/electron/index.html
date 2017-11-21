@@ -10,8 +10,9 @@
     <h1>Web Bluetooth Native (Electron Example)</h1>
     <button id='search'>Search</button>
 
-    <script type="text/javascript" src="web-bluetooth-native.js"/>
     <script type="text/javascript">
+        require('./web-bluetooth-native')
+
         console.log('Attaching Event Listener')
 
         var searchButton = document.getElementById('search')
