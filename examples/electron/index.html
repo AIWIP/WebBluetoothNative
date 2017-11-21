@@ -8,12 +8,18 @@
 </head>
 <body>
     <h1>Web Bluetooth Native (Electron Example)</h1>
-    <p onclick="scan()">Searching For Bluetooth</p>
+    <button id='search'>Search</button>
+
     <script type="text/javascript" src="web-bluetooth-native.js"/>
     <script type="text/javascript">
-        function scan() {
+        console.log('Attaching Event Listener')
+
+        var searchButton = document.getElementById('search')
+
+        searchButton.addEventListener('click', function (event) {
+            console.log('Requesting Scan')
             navigator.bluetooth.requestLEScan()
-        }
+        })
     </script>
 </body>
 </html>
