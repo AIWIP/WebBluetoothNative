@@ -1,16 +1,5 @@
 const { ipcRenderer } = require('electron')
 
-class BluetoothClientContext {
-
-}
-
-class RenderProcessImplementation {
-
-    constructor() {
-        this.context = BluetoothClientContext()
-    }
-}
-
 module.exports = function setupWebBluetoothPolyfill(navigator) {
     const hasBluetoothSupport = (navigator.bluetooth !== undefined);
     const hasBluetoothLESupport = (navigator.bluetooth.requestLEScan !== undefined); 

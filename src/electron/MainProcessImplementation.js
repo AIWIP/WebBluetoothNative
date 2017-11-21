@@ -1,34 +1,39 @@
 const noble = require('noble');
 
-class BluetoothHostContext {
-    constructor() {
-        this.leRequests = []
-    }
-}
-
 class MainProcessImplementation {
 
     constructor() {
         console.log('Make Main')
 
         this.poweredOn = false
-        this.context = new BluetoothHostContext()
+        this.leRequests = []
 
         noble.on('stateChange', function(state) {
             console.log('Bluetooth State Changed: ' + state);
 
             this.poweredOn = (state == 'poweredOn')
         });
+
+        noble.on('discover', function(peripheral) {
+            console.log(peripheral);
+        });
     }
 
     requestLEScan() {
         console.log('Requesting LE Scan')
-        
-        noble.on('discover', function(peripheral) {
-            console.log(peripheral);
-        });
 
-        noble.startScanning();
+        this.leRequests.push(1)
+        this._leRequestsDidUpdate()
+    }
+
+    _leRequestsDidUpdate() {
+        if (this.leRequests.length > 0) {
+            console.log('Bluetooth Started Scanning')
+            noble.startScanning();
+        } else {
+            console.log('Bluetooth Stopped Scanning')
+            noble.stopScanning();
+        }
     }
 }
 
