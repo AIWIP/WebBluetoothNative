@@ -68,24 +68,24 @@
 /***/ (function(module, exports, __webpack_require__) {
 
 /* WEBPACK VAR INJECTION */(function(process) {const { ipcRenderer } = __webpack_require__(2);
-const i = __webpack_require__(3);
-const b = __webpack_require__(4);
+const setupMainProcessPolyfill = __webpack_require__(3);
+const setupBridgePolyfill = __webpack_require__(4);
 const setupRendererPolyfill = __webpack_require__(5);
 
-function isRenderer() {
+function isElectronMainProcess() {
+    return (process && process.type === 'browser')
+}
+function isElectronRenderer() {
     return (process && process.type !== 'browser')
 }
 
-// const {ipcMain} = require('electron')
+if (isElectronMainProcess()) {
+    setupBridgePolyfill()
 
-// ipcMain.on('request-le-scan', (event, arg) => {
-//   console.log(arg)  // prints "ping"
-//   event.sender.send('asynchronous-reply', 'request-le-scan')
-// })
+    this.navigator = setupMainProcessPolyfill(navigator)
+}
 
-console.log(isRenderer())
-
-if (isRenderer()) {
+if (isElectronRenderer()) {
     this.navigator = setupRendererPolyfill(navigator)
 }
 
@@ -291,13 +291,31 @@ module.exports = require("electron");
 /* 3 */
 /***/ (function(module, exports) {
 
-console.log("Main")
+module.exports = function setupWebBluetoothPolyfill(navigator) {
+    
+    console.log('Main Implementation Goes Here')
+
+    return navigator
+}
 
 /***/ }),
 /* 4 */
 /***/ (function(module, exports) {
 
-console.log("Bridge")
+module.exports = function setupWebBluetoothPolyfill(navigator) {
+    
+    // const {ipcMain} = require('electron')
+
+    // ipcMain.on('request-le-scan', (event, arg) => {
+    //   console.log(arg)  // prints "ping"
+    //   event.sender.send('asynchronous-reply', 'request-le-scan')
+    // })
+
+    console.log("Web Bluetooth Bridge configured")
+
+    return navigator
+}
+
 
 /***/ }),
 /* 5 */

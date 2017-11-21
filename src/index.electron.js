@@ -1,12 +1,21 @@
 const { ipcRenderer } = require('electron');
-const i = require('./electron/MainProcessImplementation');
-const b = require('./electron/BridgeImplementation');
+const setupMainProcessPolyfill = require('./electron/MainProcessImplementation');
+const setupBridgePolyfill = require('./electron/BridgeImplementation');
 const setupRendererPolyfill = require('./electron/RendererProcessImplementation');
 
-function isRenderer() {
+function isElectronMainProcess() {
+    return (process && process.type === 'browser')
+}
+function isElectronRenderer() {
     return (process && process.type !== 'browser')
 }
 
-if (isRenderer()) {
+if (isElectronMainProcess()) {
+    setupBridgePolyfill()
+
+    this.navigator = setupMainProcessPolyfill(navigator)
+}
+
+if (isElectronRenderer()) {
     this.navigator = setupRendererPolyfill(navigator)
 }
