@@ -12,9 +12,7 @@ module.exports = function setupWebBluetoothPolyfill(navigator) {
 
         console.log('Polyfilling Bluetooth Support')
 
-        navigator.bluetooth.requestDevice = () => {
-            ipcRenderer.send('asynchronous-message', 'ping')
-        }
+        navigator.bluetooth.requestDevice = () => {}
     }
 
     if (!hasBluetoothLESupport) {

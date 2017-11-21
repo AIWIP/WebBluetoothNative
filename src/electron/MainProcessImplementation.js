@@ -1,5 +1,16 @@
 const noble = require('noble');
 
+class BluetoothLEScan {
+    constructor(implementation) {
+        this.implementation = implementation
+    }
+
+    stop() {
+        console.log('Requesting stop of LE Scan')
+        this.implementation._stopLEScan(this);
+    }
+}
+
 class MainProcessImplementation {
 
     constructor() {
@@ -24,9 +35,19 @@ class MainProcessImplementation {
 
         this.leRequests.push(1)
         this._leRequestsDidUpdate()
+
+        return Promise.resolve(new BluetoothLEScan(this))
+    }
+
+    _stopLEScan(scan) {
+        const index = this.leRequests.indexOf(scan);
+        this.leRequests.splice(index, 1);
+
+        this._leRequestsDidUpdate()
     }
 
     _leRequestsDidUpdate() {
+
         if (this.leRequests.length > 0) {
             console.log('Bluetooth Started Scanning')
             noble.startScanning();
