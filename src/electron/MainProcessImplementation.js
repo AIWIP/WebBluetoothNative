@@ -1,4 +1,5 @@
 const noble = require('noble');
+const EventTarget = require('event-target-shim').EventTarget;
 
 class BluetoothLEScan {
     constructor(implementation) {
@@ -11,9 +12,12 @@ class BluetoothLEScan {
     }
 }
 
-class MainProcessImplementation {
+class MainProcessImplementation extends EventTarget {
 
     constructor() {
+
+        super()
+
         console.log('Make Main')
 
         this.poweredOn = false
@@ -21,12 +25,13 @@ class MainProcessImplementation {
 
         noble.on('stateChange', function(state) {
             console.log('Bluetooth State Changed: ' + state);
-
             this.poweredOn = (state == 'poweredOn')
         });
 
         noble.on('discover', function(peripheral) {
-            console.log(peripheral);
+            console.log('Dispatching Discovered Event: ' + peripheral);
+            const event = new Event("advertisementreceived", peripheral)
+            this.dispatchEvent(event)
         });
     }
 

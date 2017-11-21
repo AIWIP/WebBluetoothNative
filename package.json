@@ -4,6 +4,7 @@
     "electron": "electron ./examples/electron"
   },
   "dependencies": {
+    "event-target-shim": "^3.0.0",
     "noble": "^1.8.1"
   },
   "devDependencies": {

@@ -748,6 +748,10 @@ event-emitter@~0.3.5:
     d "1"
     es5-ext "~0.10.14"
 
+event-target-shim@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/event-target-shim/-/event-target-shim-3.0.0.tgz#d2faa31db7d97188463b2cbde5e09601acae4672"
+
 events@^1.0.0:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/events/-/events-1.1.1.tgz#9ebdb7635ad099c70dcc4c2a1f5004288e8bd924"
