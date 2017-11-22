@@ -15,6 +15,8 @@ Read the specs here:
 
 - Document implmentation
 - Unit test implementation
+- Modualize correctly so it can be imported in both Main Electron and Renderer Electron
+- Modualize so that it's easy to add additional backend support (CoreBluetooth etc)
 - Implement for electron OS X
 - Implement for electron Windows
 - Implement for React Native iOS
