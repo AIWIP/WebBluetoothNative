@@ -21,8 +21,13 @@
             console.log('Requesting LE Scan')
 
             navigator.bluetooth.requestLEScan().then( scan => {
-                console.log('Stopping LE Scan')
-                scan.stop()
+
+                navigator.bluetooth.addEventListener('advertisementreceived', (p) => {
+                    console.log(p)
+                })
+
+                // console.log('Stopping LE Scan')
+                // scan.stop()
             })
         })
     </script>
