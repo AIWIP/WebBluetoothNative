@@ -10,9 +10,6 @@ function isElectronRenderer() {
 
 if (isElectronMainProcess()) {
     const bluetooth = require('./electron/mainProcessImplementation');
-    const setupBridge = require('./electron/bridge');
-
-    setupBridge(bluetooth)
     module.exports = bluetooth
 }
 

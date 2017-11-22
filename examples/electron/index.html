@@ -19,7 +19,11 @@
 
         searchButton.addEventListener('click', function (event) {
             console.log('Requesting LE Scan')
-            navigator.bluetooth.requestLEScan()
+
+            navigator.bluetooth.requestLEScan().then( scan => {
+                console.log('Stopping LE Scan')
+                scan.stop()
+            })
         })
     </script>
 </body>

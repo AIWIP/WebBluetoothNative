@@ -1,0 +1,1 @@
+../../src/electron/mainProcessImplementation.js
